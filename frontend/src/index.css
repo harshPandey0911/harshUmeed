@@ -2,12 +2,12 @@
 @import 'tailwindcss';
 
 :root {
-  --brand-start: #00a877;
-  --brand-end: #008f67;
+  --brand-start: #323232;
+  --brand-end: #444444;
   --brand-accent: #facc15;
-  --app-bg: #f6f7fb;
-  --text-primary: #111827;
-  --text-secondary: #6b7280;
+  --app-bg: #ddd0c8;
+  --text-primary: #323232;
+  --text-secondary: #5f5651;
   --radius-base: 16px;
 }
 
@@ -25,8 +25,8 @@ body,
 body {
   font-family: 'Sora', sans-serif;
   background:
-    radial-gradient(circle at 10% -10%, rgba(0, 168, 119, 0.09), transparent 30%),
-    radial-gradient(circle at 90% 100%, rgba(0, 143, 103, 0.08), transparent 34%),
+    radial-gradient(circle at 10% -10%, rgba(50, 50, 50, 0.08), transparent 30%),
+    radial-gradient(circle at 90% 100%, rgba(93, 84, 77, 0.1), transparent 34%),
     var(--app-bg);
   color: var(--text-primary);
   line-height: 1.4;
@@ -47,21 +47,21 @@ body {
 @layer components {
   .card-surface {
     border-radius: var(--radius-base);
-    @apply bg-white shadow-[0_8px_24px_rgba(17,24,39,0.08)] ring-1 ring-slate-200/60;
+    @apply bg-[#f8f4f1] shadow-[0_8px_24px_rgba(50,50,50,0.12)] ring-1 ring-[#cabcb3];
   }
 
   .brand-gradient {
-    @apply bg-gradient-to-r from-[#00a877] to-[#008f67];
+    @apply bg-gradient-to-r from-[#323232] to-[#444444];
   }
 
   .primary-btn {
     border-radius: var(--radius-base);
-    @apply w-full bg-gradient-to-r from-[#00a877] to-[#008f67] px-4 py-3 text-sm font-semibold text-white shadow-[0_8px_20px_rgba(0,168,119,0.28)] transition-all duration-200 active:scale-[0.98];
+    @apply w-full bg-gradient-to-r from-[#323232] to-[#444444] px-4 py-3 text-sm font-semibold text-white shadow-[0_8px_20px_rgba(50,50,50,0.3)] transition-all duration-200 active:scale-[0.98];
   }
 
   .input-field {
     border-radius: var(--radius-base);
-    @apply w-full border border-slate-200 bg-slate-50 px-4 py-3 text-sm text-slate-900 outline-none transition focus:border-[#00a877] focus:bg-white focus:ring-2 focus:ring-[#c9f1e5];
+    @apply w-full border border-[#c7b8af] bg-[#f6f0ec] px-4 py-3 text-sm text-[#323232] outline-none transition focus:border-[#323232] focus:bg-white focus:ring-2 focus:ring-[#e8ddd6];
   }
 
   .screen-shell {
