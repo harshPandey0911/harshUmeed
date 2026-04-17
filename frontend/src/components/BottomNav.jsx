@@ -85,20 +85,30 @@ function BottomNav() {
   const location = useLocation()
   const isDeliveryRoute = location.pathname.startsWith('/delivery')
   const basePath = isDeliveryRoute ? '/delivery' : '/retailer'
+  const isRetailerRoute = !isDeliveryRoute
+  const activeTone = isRetailerRoute ? '#323232' : '#00A877'
   const tabs = getTabs(basePath)
   const activeIndex = tabs.findIndex((tab) => tab.path === location.pathname)
   const safeIndex = activeIndex >= 0 ? activeIndex : 0
   const activeIcon = tabs[safeIndex]?.icon ?? tabs[0].icon
 
   return (
-    <nav className="fixed bottom-4 left-1/2 z-50 w-[94%] max-w-md -translate-x-1/2 rounded-[38px] border border-white/80 bg-white/95 px-2 py-2 shadow-[0_14px_30px_rgba(0,0,0,0.12)] backdrop-blur-md transition-all duration-300 ease-[cubic-bezier(0.22,1,0.36,1)]">
+    <nav className="fixed bottom-3 left-1/2 z-50 w-[94%] max-w-md -translate-x-1/2 rounded-[34px] border border-[#bcaea6] bg-[#ddd0c8]/95 px-2 py-2 shadow-[0_12px_24px_rgba(50,50,50,0.2)] backdrop-blur-md transition-all duration-300 ease-[cubic-bezier(0.22,1,0.36,1)]">
       <ul className="relative grid grid-cols-5 items-end gap-0">
         <span
           aria-hidden="true"
-          className="pointer-events-none absolute left-0 top-[13px] z-0 flex h-[44px] w-1/5 items-center justify-center transition-transform duration-500 ease-[cubic-bezier(0.22,1,0.36,1)]"
+          className="pointer-events-none absolute left-0 top-[8px] z-0 flex h-[44px] w-1/5 items-center justify-center transition-transform duration-500 ease-[cubic-bezier(0.22,1,0.36,1)]"
           style={{ transform: `translateX(${safeIndex * 100}%)` }}
         >
-          <span className="grid h-11 w-11 place-items-center rounded-full bg-[#00A877] text-white shadow-[0_8px_18px_rgba(0,168,119,0.35)]">
+          <span
+            className="grid h-11 w-11 place-items-center rounded-full text-white"
+            style={{
+              backgroundColor: activeTone,
+              boxShadow: isRetailerRoute
+                ? '0 8px 18px rgba(50,50,50,0.35)'
+                : '0 8px 18px rgba(0,168,119,0.35)',
+            }}
+          >
             <NavIcon name={activeIcon} active={true} />
           </span>
         </span>
@@ -109,7 +119,7 @@ function BottomNav() {
               to={tab.path}
               className={({ isActive }) =>
                 `relative flex min-h-[70px] flex-col items-center justify-end rounded-2xl pb-1 text-[11px] font-semibold transition-all duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] ${
-                  isActive ? 'text-[#00A877]' : 'text-[#6b7280]'
+                  isActive ? 'text-[#1f1f1f]' : 'text-[#6b7280]'
                 }`
               }
             >
@@ -126,7 +136,7 @@ function BottomNav() {
                   </span>
                   <span
                     className={`leading-none transition-all duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] ${
-                      isActive ? 'translate-y-0 opacity-100' : 'translate-y-[1px] opacity-90'
+                      isActive ? 'mt-1 translate-y-0 opacity-100' : 'translate-y-[1px] opacity-90'
                     }`}
                   >
                     {tab.label}

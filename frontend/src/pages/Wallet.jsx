@@ -1,5 +1,4 @@
-import Card from '../components/Card'
-import Header from '../components/Header'
+import { useNavigate } from 'react-router-dom'
 
 const walletBalances = {
   total: '₹18,760',
@@ -42,98 +41,111 @@ const transactions = [
 ]
 
 function Wallet() {
+  const navigate = useNavigate()
+
   return (
-    <div className="space-y-4">
-      <Header title="Wallet" subtitle="Manage credits and payments" />
+    <div className="bg-[#e9ddd6] pb-28">
+      <header className="sticky top-0 z-30 flex h-[54px] items-center gap-2 bg-[#323232] px-3 text-white shadow-sm">
+        <button
+          type="button"
+          onClick={() => navigate(-1)}
+          className="grid h-8 w-8 place-items-center rounded-full text-[22px] font-light text-[#ddd0c8]"
+          aria-label="Go back"
+        >
+          ‹
+        </button>
+        <h1 className="text-[17px] font-semibold">Wallet</h1>
+      </header>
 
-      <section className="brand-gradient rounded-2xl p-5 text-white shadow-[0_10px_24px_rgba(0,168,119,0.24)]">
-        <p className="text-[11px] font-semibold uppercase tracking-[0.16em] text-[#d6f5ea]">Wallet Balance</p>
-        <p className="mt-2 text-[30px] font-semibold leading-none tracking-[-0.01em]">{walletBalances.total}</p>
-        <p className="mt-2 text-xs text-[#d6f5ea]">Updated 2 minutes ago</p>
-
-        <div className="mt-4 grid grid-cols-2 gap-2">
-          <div className="rounded-2xl bg-white/14 p-3">
-            <p className="text-[11px] text-[#d6f5ea]">Cashback Balance</p>
-            <p className="mt-1 text-base font-semibold">{walletBalances.cashback}</p>
+      <section className="border-b border-[#bcaea6] bg-[#ddd0c8] px-3 py-3">
+        <div className="flex items-start justify-between gap-3">
+          <div>
+            <p className="text-sm font-medium text-[#323232]">Retailer Wallet</p>
+            <p className="mt-0.5 text-xs text-[#5f5651]">Umeed Retail Store</p>
           </div>
-          <div className="rounded-2xl bg-white/14 p-3">
-            <p className="text-[11px] text-[#d6f5ea]">Voucher Balance</p>
-            <p className="mt-1 text-base font-semibold">{walletBalances.vouchers}</p>
+          <div className="text-right">
+            <p className="text-[22px] font-semibold text-[#323232]">{walletBalances.total}</p>
+            <p className="text-xs text-[#5f5651]">Updated 2 min ago</p>
           </div>
         </div>
       </section>
 
-      <Card className="p-4">
-        <h3 className="section-title">Cashback Summary</h3>
-        <p className="section-subtitle mt-1">Track earned vs used cashback</p>
+      <section className="space-y-3 px-3 py-3">
+        <article className="rounded-[14px] border border-[#cec0b7] bg-[#e9ddd6] p-3 shadow-[0_8px_18px_rgba(50,50,50,0.14)]">
+          <h3 className="text-sm font-semibold text-[#1f1f1f]">Balance Summary</h3>
+          <div className="mt-3 grid grid-cols-2 gap-2">
+            <div className="rounded-xl bg-[#efe5df] p-3">
+              <p className="text-[11px] text-[#5f5651]">Cashback Balance</p>
+              <p className="mt-1 text-base font-semibold text-[#1c1c1c]">{walletBalances.cashback}</p>
+            </div>
+            <div className="rounded-xl bg-[#efe5df] p-3">
+              <p className="text-[11px] text-[#666]">Voucher Balance</p>
+              <p className="mt-1 text-base font-semibold text-[#1c1c1c]">{walletBalances.vouchers}</p>
+            </div>
+          </div>
 
-        <div className="mt-4 grid grid-cols-3 gap-2">
-          <div className="rounded-2xl bg-emerald-50 p-3">
-            <p className="text-[11px] text-emerald-700">Earned</p>
-            <p className="mt-1 text-sm font-semibold text-emerald-800">{cashbackStats.earned}</p>
+          <div className="mt-3 grid grid-cols-3 gap-2">
+            <div className="rounded-lg border border-[#d2c5bd] bg-[#efe5df] p-2">
+              <p className="text-[10px] text-[#5f5651]">Earned</p>
+              <p className="mt-1 text-xs font-semibold text-[#1b1b1b]">{cashbackStats.earned}</p>
+            </div>
+            <div className="rounded-lg border border-[#d2c5bd] bg-[#efe5df] p-2">
+              <p className="text-[10px] text-[#5f5651]">Used</p>
+              <p className="mt-1 text-xs font-semibold text-[#1b1b1b]">{cashbackStats.used}</p>
+            </div>
+            <div className="rounded-lg border border-[#d2c5bd] bg-[#efe5df] p-2">
+              <p className="text-[10px] text-[#5f5651]">Remaining</p>
+              <p className="mt-1 text-xs font-semibold text-[#1b1b1b]">{cashbackStats.remaining}</p>
+            </div>
           </div>
-          <div className="rounded-2xl bg-rose-50 p-3">
-            <p className="text-[11px] text-rose-700">Used</p>
-            <p className="mt-1 text-sm font-semibold text-rose-800">{cashbackStats.used}</p>
-          </div>
-          <div className="rounded-2xl bg-[#e6f7f2] p-3">
-            <p className="text-[11px] text-[#008f67]">Remaining</p>
-            <p className="mt-1 text-sm font-semibold text-[#007a59]">{cashbackStats.remaining}</p>
-          </div>
-        </div>
-      </Card>
+        </article>
 
-      <Card className="p-4">
-        <div className="mb-3 flex items-center justify-between">
-          <div>
-            <h3 className="section-title">Available Vouchers</h3>
-            <p className="section-subtitle mt-1">Apply on eligible wholesale orders</p>
-          </div>
-        </div>
+        <article className="rounded-[14px] border border-[#cec0b7] bg-[#e9ddd6] p-3 shadow-[0_8px_18px_rgba(50,50,50,0.14)]">
+          <h3 className="text-sm font-semibold text-[#1f1f1f]">Available Vouchers</h3>
+          <p className="mt-0.5 text-xs text-[#727272]">Apply on eligible wholesale orders</p>
 
-        <div className="space-y-3">
-          {vouchers.map((voucher) => (
-            <article key={`${voucher.discount}-${voucher.expiry}`} className="rounded-2xl border border-slate-200 bg-slate-50 p-3">
-              <div className="flex items-start justify-between gap-3">
-                <div>
-                  <p className="text-sm font-semibold text-[#111827]">{voucher.discount}</p>
-                  <p className="mt-1 text-xs text-[#6b7280]">{voucher.minOrder}</p>
+          <div className="mt-3 space-y-2">
+            {vouchers.map((voucher) => (
+              <article key={`${voucher.discount}-${voucher.expiry}`} className="rounded-xl border border-[#d2c5bd] bg-[#efe5df] p-2.5">
+                <div className="flex items-start justify-between gap-3">
+                  <div>
+                    <p className="text-[13px] font-semibold text-[#1c1c1c]">{voucher.discount}</p>
+                    <p className="mt-0.5 text-xs text-[#666]">{voucher.minOrder}</p>
+                  </div>
+                  <button
+                    type="button"
+                    className="rounded-full bg-[#323232] px-3 py-1 text-[10px] font-semibold text-white"
+                  >
+                    Use
+                  </button>
                 </div>
-                <button
-                  type="button"
-                  className="rounded-full border border-[#bde9dc] bg-white px-3 py-1.5 text-xs font-semibold text-[#008f67] transition hover:bg-[#e6f7f2]"
-                >
-                  Use Now
-                </button>
-              </div>
 
-              <div className="mt-3 flex flex-wrap items-center gap-2 text-[11px] text-slate-600">
-                <span className="rounded-full bg-slate-200 px-2 py-1">{voucher.category}</span>
-                <span>{voucher.expiry}</span>
-              </div>
-            </article>
-          ))}
-        </div>
-      </Card>
+                <div className="mt-2 flex flex-wrap items-center gap-2 text-[10px] text-[#6d6d6d]">
+                  <span className="rounded-full bg-[#e4d7cf] px-2 py-0.5">{voucher.category}</span>
+                  <span>{voucher.expiry}</span>
+                </div>
+              </article>
+            ))}
+          </div>
+        </article>
 
-      <Card className="p-4">
-        <h3 className="section-title">Recent Transactions</h3>
-        <p className="section-subtitle mt-1">Order, cashback, and refund activity</p>
-
-        <div className="mt-4 space-y-3">
-          {transactions.map((item) => (
-            <article key={`${item.title}-${item.date}`} className="flex items-center justify-between rounded-2xl bg-slate-50 px-3 py-3">
-              <div className="min-w-0 pr-3">
-                <p className="truncate text-sm font-medium text-[#111827]">{item.title}</p>
-                <p className="mt-1 text-xs text-[#6b7280]">{item.date}</p>
-              </div>
-              <span className={`text-sm font-semibold ${item.type === 'credit' ? 'text-emerald-600' : 'text-rose-600'}`}>
-                {item.amount}
-              </span>
-            </article>
-          ))}
-        </div>
-      </Card>
+        <article className="rounded-[14px] border border-[#cec0b7] bg-[#e9ddd6] p-3 shadow-[0_8px_18px_rgba(50,50,50,0.14)]">
+          <h3 className="text-sm font-semibold text-[#1f1f1f]">Recent Transactions</h3>
+          <div className="mt-2 space-y-2">
+            {transactions.map((item) => (
+              <article key={`${item.title}-${item.date}`} className="flex items-center justify-between rounded-xl bg-[#efe5df] px-3 py-2">
+                <div className="min-w-0 pr-3">
+                  <p className="truncate text-xs font-medium text-[#1f1f1f]">{item.title}</p>
+                  <p className="mt-0.5 text-[11px] text-[#757575]">{item.date}</p>
+                </div>
+                <span className={`text-xs font-semibold ${item.type === 'credit' ? 'text-[#323232]' : 'text-[#a64b4b]'}`}>
+                  {item.amount}
+                </span>
+              </article>
+            ))}
+          </div>
+        </article>
+      </section>
     </div>
   )
 }
