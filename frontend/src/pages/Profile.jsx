@@ -1,5 +1,3 @@
-import Card from '../components/Card'
-import Header from '../components/Header'
 import { useLocation, useNavigate } from 'react-router-dom'
 
 function Profile() {
@@ -18,45 +16,64 @@ function Profile() {
   }
 
   return (
-    <div>
-      <Header title="Profile" subtitle={isDeliveryRoute ? 'Delivery partner account details' : 'Retailer account details'} />
+    <div className="bg-[#e9ddd6] pb-28">
+      <header className="sticky top-0 z-30 flex h-[54px] items-center gap-2 bg-[#323232] px-3 text-white shadow-sm">
+        <button
+          type="button"
+          onClick={() => navigate(-1)}
+          className="grid h-8 w-8 place-items-center rounded-full text-[22px] font-light text-[#ddd0c8]"
+          aria-label="Go back"
+        >
+          ‹
+        </button>
+        <h1 className="text-[17px] font-semibold">Profile</h1>
+      </header>
 
-      <Card className="mb-4">
-        <div className="flex items-center gap-3">
-          <div className="grid h-12 w-12 place-items-center rounded-2xl brand-gradient text-sm font-bold text-white">
+      <section className="border-b border-[#bcaea6] bg-[#ddd0c8] px-3 py-3">
+        <div className="flex items-center justify-between gap-3">
+          <div className="min-w-0">
+            <p className="text-sm font-medium text-[#323232]">{isDeliveryRoute ? 'Delivery Partner' : 'Retailer Account'}</p>
+            <p className="mt-0.5 truncate text-xs text-[#5f5651]">
+              {isDeliveryRoute ? 'delivery.partner@umeed.com' : 'retailer.partner@umeed.com'}
+            </p>
+          </div>
+          <div className="grid h-11 w-11 place-items-center rounded-full bg-[#f8f4f1] text-sm font-bold text-[#323232]">
             {isDeliveryRoute ? 'DP' : 'UR'}
           </div>
-          <div>
-            <p className="text-sm font-semibold text-slate-900">{isDeliveryRoute ? 'Umeed Delivery Partner' : 'Umeed Retail Store'}</p>
-            <p className="text-xs text-slate-500">{isDeliveryRoute ? 'delivery.partner@umeed.com' : 'retailer.partner@umeed.com'}</p>
-          </div>
         </div>
-      </Card>
+      </section>
 
-      <Card>
-        <div className="space-y-3 text-sm">
-          <div className="flex items-center justify-between">
-            <span className="text-slate-500">{isDeliveryRoute ? 'Partner ID' : 'Store ID'}</span>
-            <span className="font-medium text-slate-900">{isDeliveryRoute ? 'DP-44712' : 'RT-90817'}</span>
+      <section className="space-y-3 px-3 py-3">
+        <article className="rounded-[14px] border border-[#cec0b7] bg-[#e9ddd6] p-3 shadow-[0_8px_18px_rgba(50,50,50,0.14)]">
+          <h2 className="text-sm font-semibold text-[#1f1f1f]">Account Details</h2>
+          <div className="mt-3 space-y-2 text-sm">
+            <div className="flex items-center justify-between rounded-lg bg-[#efe5df] px-3 py-2">
+              <span className="text-[#666]">{isDeliveryRoute ? 'Partner Name' : 'Store Name'}</span>
+              <span className="text-right text-[13px] font-medium text-[#1f1f1f]">{isDeliveryRoute ? 'Umeed Delivery Partner' : 'Umeed Retail Store'}</span>
+            </div>
+            <div className="flex items-center justify-between rounded-lg bg-[#efe5df] px-3 py-2">
+              <span className="text-[#666]">{isDeliveryRoute ? 'Partner ID' : 'Store ID'}</span>
+              <span className="font-medium text-[#1f1f1f]">{isDeliveryRoute ? 'DP-44712' : 'RT-90817'}</span>
+            </div>
+            <div className="flex items-center justify-between rounded-lg bg-[#efe5df] px-3 py-2">
+              <span className="text-[#666]">City</span>
+              <span className="font-medium text-[#1f1f1f]">Lahore</span>
+            </div>
+            <div className="flex items-center justify-between rounded-lg bg-[#efe5df] px-3 py-2">
+              <span className="text-[#666]">Tier</span>
+              <span className="rounded-full bg-[#e6dad2] px-2 py-1 text-[11px] font-semibold text-[#323232]">Gold Partner</span>
+            </div>
           </div>
-          <div className="flex items-center justify-between">
-            <span className="text-slate-500">City</span>
-            <span className="font-medium text-slate-900">Lahore</span>
-          </div>
-          <div className="flex items-center justify-between">
-            <span className="text-slate-500">Tier</span>
-            <span className="rounded-full bg-amber-100 px-2 py-1 text-[11px] font-semibold text-amber-700">Gold Partner</span>
-          </div>
-        </div>
+        </article>
 
         <button
           type="button"
           onClick={handleLogout}
-          className="mt-5 w-full rounded-xl border border-[#bde9dc] bg-[#e6f7f2] px-4 py-2.5 text-sm font-semibold text-[#008f67] transition hover:bg-[#d8f2e9]"
+          className="w-full rounded-[12px] border border-[#323232] bg-[#323232] py-2.5 text-sm font-semibold text-[#ddd0c8]"
         >
           Logout
         </button>
-      </Card>
+      </section>
     </div>
   )
 }
