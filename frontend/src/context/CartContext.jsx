@@ -14,7 +14,16 @@ function CartProvider({ children }) {
         )
       }
 
-      return [...prev, { id: product.id, name: product.name, price: product.price, quantity: 1 }]
+      return [
+        ...prev,
+        {
+          id: product.id,
+          name: product.name,
+          price: product.price,
+          image: product.image,
+          quantity: 1,
+        },
+      ]
     })
   }
 
